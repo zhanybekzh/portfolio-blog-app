@@ -1,0 +1,96 @@
+.home {
+  .about-me {
+    margin-bottom: 60px;
+  }
+  .about-me__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: 992px) {
+      flex-direction: row;
+      flex-flow: row-reverse;
+      margin: 60px auto 60px;
+    }
+  }
+  .about-me__photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 35px auto 45px;
+    @media (min-width: 992px) {
+      flex: 1 0;
+    }
+    .img__wrapper {
+      display: block;
+      width: 170px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      @media (min-width: 400px) {
+        width: 45%;
+      }
+      @media (min-width: 576px) {
+        width: 45%;
+      }
+      @media (min-width: 992px) {
+        width: 65%;
+      }
+      @media (min-width: 1400px) {
+        width: 60%;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background-color: $light-secondary;
+        transform: translate(-10px, 15px);
+      }
+    }
+    img {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  .about-me__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: 992px) {
+      flex: 0 1 55%;
+    }
+    @media (min-width: 1200px) {
+      flex: 0 1 50%;
+    }
+  }
+  .about-me__head {
+    width: 80%;
+    text-align: center;
+    font-size: 2rem;
+    color: $text-color;
+    margin-bottom: 20px;
+    @media (min-width: 992px) {
+      margin-bottom: 40px;
+    }
+  }
+  .about-me__text {
+    text-align: center;
+    font-size: 1rem;
+    color: $text-color;
+    margin: 0 auto 25px;
+    padding: 0 5px;
+  }
+  .about-me__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @media (min-width: 400px) {
+      flex-direction: row;
+    }
+  }
+}

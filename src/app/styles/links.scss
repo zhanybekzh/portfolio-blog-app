@@ -1,0 +1,11 @@
+.link-to-page {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  text-decoration: none;
+  color: $text-color;
+  margin-left: auto;
+  &:hover {
+    text-decoration: underline;
+  }
+}

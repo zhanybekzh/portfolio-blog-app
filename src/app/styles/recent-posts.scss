@@ -1,0 +1,43 @@
+.recent-posts {
+  padding-bottom: 40px;
+  & &__head {
+    color: $text-color;
+    font-size: 18px;
+    margin: 60px auto 20px;
+    font-weight: 400;
+    text-align: center;
+    @media(min-width:576px) {
+      margin-bottom: 30px;
+      font-size: 22px;
+      text-align: left;
+    }
+  }
+  & &__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    align-items: stretch;
+    margin-bottom: 20px;
+    @media (min-width: 768px) {
+      margin-bottom: 20px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 1200px) {
+      margin-bottom: 20px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .post {
+      min-height: 250px;
+    }
+    .post-link {
+      &:nth-child(3) {
+        display: none;
+      }
+      @media(min-width: 1200px) {
+        &:nth-child(3) {
+          display: block;
+        }
+      }
+    }
+  }
+}

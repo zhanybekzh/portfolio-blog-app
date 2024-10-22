@@ -1,0 +1,136 @@
+header.shadow {
+  .header-mobile-menu {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+.header-mobile-menu {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transition: all ease 1s;
+  @media (min-width: 768px) {
+    display: none;
+  }
+  &__content {
+    display: flex;
+    justify-content: flex-end;
+    min-height: 50px;
+  }
+  &-icon__wrapper {
+    min-height: 100%;
+    width: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      .header-mobile-menu-icon span {
+        background-color: $primary;
+      }
+      .header-mobile-menu-icon::before {
+        background-color: $primary;
+      }
+      .header-mobile-menu-icon::after {
+        background-color: $primary;
+      }
+    }
+  }
+  &-icon {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 16px;
+    @media (min-width: 1200px) {
+      display: none;
+    }
+    span {
+      @extend %menu-burger-sticks;
+      top: 50%;
+      transform: scale(1) translate(0px, -50%);
+    }
+    &::before {
+      content: "";
+      @extend %menu-burger-sticks;
+      top: 0;
+    }
+    &::after {
+      content: "";
+      @extend %menu-burger-sticks;
+      bottom: 0;
+    }
+  }
+  &__list-wrapper {
+    width: 100%;
+    min-height: fit-content;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+    position: fixed;
+    right: -100%;
+    z-index: 3;
+    background-color: white;
+    min-height: fit-content;
+    transition: all ease 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  &._active {
+    .header-mobile-menu__list {
+      right: 0;
+    }
+    .header-mobile-menu-icon span {
+      background-color: $primary;
+      transform: scale(0) translate(0px, -50%);
+    }
+    .header-mobile-menu-icon::before {
+      top: 50%;
+      background-color: $primary;
+      transform: rotate(45deg) translate(0px, -50%);
+    }
+    .header-mobile-menu-icon::after {
+      bottom: 50%;
+      background-color: $primary;
+      transform: rotate(-45deg) translate(0px, 50%);
+    }
+  }
+  &__item {
+    a {
+      text-decoration: none;
+      color: black;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.15em;
+      display: inline-block;
+      padding: 15px 20px;
+      position: relative;
+      &:after {
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0px;
+        content: "";
+        display: block;
+        height: 4px;
+        left: 50%;
+        position: absolute;
+        background: $primary;
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+      }
+    }
+    a:hover:after {
+      width: 100%;
+      left: 0;
+    }
+  }
+}

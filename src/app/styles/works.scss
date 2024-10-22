@@ -1,0 +1,47 @@
+.work {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E0E0E0;
+  margin-bottom: 20px;
+  @media(min-width: 768px) {
+    border: none;
+    margin-bottom: 0;
+  }
+  &__img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    img {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+    }
+  }
+  &__title {
+    font-size: 22px;
+    line-height: 1;
+    margin: 0 auto 20px;
+    line-height: 30px;
+  }
+  &__properties {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  &__date {
+    @include badge;
+    @include badge-black;
+  }
+  &__theme {
+    color: $light;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  &__description {
+    text-align: justify;
+    margin-bottom: 20px;
+  }
+}
