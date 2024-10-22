@@ -1,95 +1,75 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import * as Icon from "react-feather";
+import Posts from "./components/HomePosts";
+import Works from "./components/HomeWorks";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <main className="home">
+      <section className="section about-me">
+        <div className="container">
+          <div className="about-me__inner">
+            <div className="about-me__photo">
+              <div className="img__wrapper">
+                <img src="/images/ava.webp" alt="Моя фотография" />
+              </div>
+            </div>
+            <div className="about-me__content">
+              <h1 className="about-me__head">
+                Hi, I am Zhanda,
+                <br />A web developer from KZ&nbsp;🇰🇿
+              </h1>
+              <p className="about-me__text">
+                I create efficient web solutions and take on both frontend and
+                backend projects separately or as a full-stack. Ready to
+                collaborate on new and exciting ideas!
+              </p>
+              <div className="about-me__buttons">
+                <a
+                  href="/files/cv.pdf"
+                  download
+                  className="about-me__button btn btn-primary"
+                >
+                  Download CV
+                </a>
+                <a
+                  href="./contacts"
+                  className="about-me__button btn btn-secondary"
+                >
+                  Hire me
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+      <section className="section recent-posts">
+        <div className="container">
+          <div className="row">
+            <h2 className="col-12 recent-posts__head">Recent posts</h2>
+            <div className="recent-posts__list posts__list">
+              <Posts />
+            </div>
+            <a href="/blog/" className="link-to-page">
+              all posts
+              <Icon.ChevronsRight className="icon icon-20" />
+            </a>
+          </div>
+        </div>
+      </section>
+      <section className="recent-works">
+        <div className="container">
+          <div className="row">
+            <h2 className="col-12 recent-works__head">Featured works</h2>
+            <div className="recent-works__list">
+              <Works />
+            </div>
+            <a href="/works/" className="link-to-page">
+              all works
+              <Icon.ChevronsRight className="icon icon-20" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
