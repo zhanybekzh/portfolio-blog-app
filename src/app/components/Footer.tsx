@@ -1,7 +1,9 @@
 import React from "react";
 import * as Icon from 'react-feather';
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+  const t = useTranslations("Footer");
   return (
     <footer>
       <div className="container">
@@ -9,12 +11,12 @@ const Footer = () => {
           <div className="footer__inner col-12">
             <div className="footer__links links">
               <div className="links__item">
-                <a href="" title="Пройти на мою instagram-страничку">
+                <a href="" title={t("instagram")}>
                   <Icon.Instagram className="icon icon-40" color={"rgba(255, 100, 100, 1)"}/>
                 </a>
               </div>
               <div className="links__item">
-                <a href="" title="Посмотреть мой GitHub">
+                <a href="" title={t("github")}>
                   <Icon.GitHub className="icon icon-40" color={"rgba(33, 36, 61, 1)"}/>
                 </a>
               </div>
@@ -22,7 +24,7 @@ const Footer = () => {
                 <a
                   href="https://wa.me/77764222201"
                   style={{ color: "#4CEA65" }}
-                  title="Написать мне на WhatsApp"
+                  title={t("whatsapp")}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +44,7 @@ const Footer = () => {
                 </a>
               </div>
               <div className="links__item">
-                <a href="" title="Написать мне в LinkedIn">
+                <a href="" title={t("linkedin")}>
                   <Icon.Linkedin className="icon  icon-40" color={"#0866C2"} />
                 </a>
               </div>
