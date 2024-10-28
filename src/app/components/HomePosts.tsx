@@ -1,43 +1,27 @@
 import React from "react";
 import Post from "./Post";
+import { localizations } from "@/i18n/localizations";
 
-const Posts = () => {
-  return (
-    <>
-      <Post />
-
-      <a className="post-link" href="">
-        <div className="recent-posts__post post">
-          <h3 className="post__title">Creating pixel perfect icons in Figma</h3>
-          <div className="post__properties">
-            <div className="post__date">12 Feb 2020</div>
-            <div className="post__theme">Design, Pattern</div>
-          </div>
-          <div className="post__description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta id
-            excepturi sit! Voluptatum necessitatibus sit et quisquam voluptatem
-            reprehenderit dolores, alias quis minus eveniet mollitia neque
-            officiis tenetur similique modi!
-          </div>
-        </div>
-      </a>
-      <a className="post-link" href="">
-        <div className="recent-posts__post post">
-          <h3 className="post__title">Creating pixel perfect icons in Figma</h3>
-          <div className="post__properties">
-            <div className="post__date">12 Feb 2020</div>
-            <div className="post__theme">Design, Pattern</div>
-          </div>
-          <div className="post__description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta id
-            excepturi sit! Voluptatum necessitatibus sit et quisquam voluptatem
-            reprehenderit dolores, alias quis minus eveniet mollitia neque
-            officiis tenetur similique modi!
-          </div>
-        </div>
-      </a>
-    </>
-  );
+async function fetchLastPosts(locale: string) {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+    },
+  };
+  try {
+    const res = await fetch(
+      `http://127.0.0.1:1337/api/blogs?locale=${localizations[locale]}&sort=Date:desc&populate=*&pagination[limit]=3`,
+      options
+    );
+    const response = await res.json();
+    return response;
+  } catch (e) {
+    throw new Error("Не получилось загрузить данные Blogs");
+  }
+}
+const Posts = async ({ locale }: any) => {
+  const lastPosts = await fetchLastPosts(locale);
+  return lastPosts?.data?.map((post: any) => <Post key={post.id} post={post} />);
 };
 
 export default Posts;
