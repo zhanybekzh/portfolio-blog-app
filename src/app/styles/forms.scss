@@ -8,3 +8,8 @@ textarea::placeholder {
   font-size: 16px;
   opacity: 1; 
 }
+form {
+  p {
+    color: $primary;
+  }
+}

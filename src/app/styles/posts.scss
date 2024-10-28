@@ -29,6 +29,7 @@
       line-height: 1;
       margin: 0 auto 20px;
       line-height: 30px;
+      min-height: 60px;
     }
     & .post__properties {
       display: flex;
@@ -41,6 +42,10 @@
     }
     & .post__description {
       text-align: justify;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 }

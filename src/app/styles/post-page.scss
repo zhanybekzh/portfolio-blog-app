@@ -1,0 +1,25 @@
+.post-page {
+  margin-top: 40px;
+  .link-to-page {
+    margin-left: unset;
+  }
+  & &__head {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  & &__properties {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+  }
+  & &__date {
+    padding-right: 20px;
+    margin-right: 20px;
+    border-right: 1px solid $text-color;
+  }
+  & &__markdown {
+    font-size: 1.3rem;
+  }
+
+}
