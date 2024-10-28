@@ -1,58 +1,27 @@
 import React from "react";
+import Link from "next/link";
 
-const BlogPosts = () => {
+const BlogPosts = ({ posts }: any) => {
   return (
     <>
-      <div className="post">
-        <h3 className="post__title">
-          <a href="/blog/24">Making a design system from scratch</a>
-        </h3>
-        <div className="post__properties">
-          <div className="post__date">12 Feb 2020</div>
-          <div className="post__theme">Design, Pattern</div>
-        </div>
-        <div className="post__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis omnis
-          corporis minus nihil eveniet dolores quae amet recusandae laborum?
-          Possimus illo quidem ex praesentium quis, eum quam sequi rerum amet.
-        </div>
-      </div>
-      <div className="post">
-        <h3 className="post__title"><a href="/blog/24">Making a design system from scratch</a></h3>
-        <div className="post__properties">
-          <div className="post__date">12 Feb 2020</div>
-          <div className="post__theme">Design, Pattern</div>
-        </div>
-        <div className="post__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis omnis
-          corporis minus nihil eveniet dolores quae amet recusandae laborum?
-          Possimus illo quidem ex praesentium quis, eum quam sequi rerum amet.
-        </div>
-      </div>
-      <div className="post">
-        <h3 className="post__title"><a href="/blog/24">Making a design system from scratch</a></h3>
-        <div className="post__properties">
-          <div className="post__date">12 Feb 2020</div>
-          <div className="post__theme">Design, Pattern</div>
-        </div>
-        <div className="post__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis omnis
-          corporis minus nihil eveniet dolores quae amet recusandae laborum?
-          Possimus illo quidem ex praesentium quis, eum quam sequi rerum amet.
-        </div>
-      </div>
-      <div className="post">
-        <h3 className="post__title"><a href="/blog/24">Making a design system from scratch</a></h3>
-        <div className="post__properties">
-          <div className="post__date">12 Feb 2020</div>
-          <div className="post__theme">Design, Pattern</div>
-        </div>
-        <div className="post__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis omnis
-          corporis minus nihil eveniet dolores quae amet recusandae laborum?
-          Possimus illo quidem ex praesentium quis, eum quam sequi rerum amet.
-        </div>
-      </div>
+      {posts?.data?.map((post: any) => {
+        return (
+          <div key={post.id} className="post">
+            <h3 className="post__title">
+              <Link href={`blog/${post.urlSlug}`}>{post.Title}</Link>
+            </h3>
+            <div className="post__properties">
+              <div className="post__date">{post.Date}</div>
+              <div className="post__theme">
+                {post?.categories
+                  ?.map((category: any) => category.Title)
+                  .join(", ")}
+              </div>
+            </div>
+            <div className="post__description">{post.Description}</div>
+          </div>
+        );
+      })}
     </>
   );
 };

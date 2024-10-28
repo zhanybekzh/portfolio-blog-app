@@ -1,23 +1,23 @@
-import React from 'react'
+import React from "react";
+import { Link } from "@/i18n/routing";
 
-const Post = () => {
+const Post = ({ post }: any) => {
   return (
-    <a className="post-link" href="">
-        <div className="post">
-          <h3 className="post__title">Making a design system from scratch</h3>
-          <div className="post__properties">
-            <div className="post__date">12 Feb 2020</div>
-            <div className="post__theme">Design, Pattern</div>
-          </div>
-          <div className="post__description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-            omnis corporis minus nihil eveniet dolores quae amet recusandae
-            laborum? Possimus illo quidem ex praesentium quis, eum quam sequi
-            rerum amet.
+    <Link className="post-link" href={'/blog/' + post.urlSlug}>
+      <div className="post">
+        <h3 className="post__title">{post.Title}</h3>
+        <div className="post__properties">
+          <div className="post__date">{post.Date}</div>
+          <div className="post__theme">
+            {post?.categories
+              ?.map((category: any) => category.Title)
+              .join(", ")}
           </div>
         </div>
-      </a>
-  )
-}
+        <div className="post__description">{post.Description}</div>
+      </div>
+    </Link>
+  );
+};
 
-export default Post
+export default Post;
