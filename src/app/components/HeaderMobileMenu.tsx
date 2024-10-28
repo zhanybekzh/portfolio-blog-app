@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import classNames from "classnames";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+import LocaleSwitcher from "./LocalSwitcher";
 
 import React from "react";
 
 const HeaderMobileMenu = () => {
+  const t = useTranslations("HeaderMenu");
+
   const [isMobileMenuOpened, setMobileMenuStatus] = useState(false);
   const toggleMobileMenu = (state: boolean = !isMobileMenuOpened) => {
     setMobileMenuStatus(state);
@@ -30,8 +35,11 @@ const HeaderMobileMenu = () => {
       })}`}
     >
       <div className="container">
-        <div className="row">
-          <div className="col-12 header-mobile-menu__content">
+        <div className="row align-items-center">
+        <div className="col-3">
+            <LocaleSwitcher />
+          </div>
+          <div className="col-9 header-mobile-menu__content">
             <div
               id="menuButton"
               onClick={() => {
@@ -47,16 +55,16 @@ const HeaderMobileMenu = () => {
           <nav className="col-12 header-mobile-menu__list-wrapper">
             <ul className="header-mobile-menu__list">
               <li className="header-mobile-menu__item">
-                <a href="/">Главная</a>
+                <Link href="/" title={t("main")}>{t("main")}</Link>
               </li>
               <li className="header-mobile-menu__item">
-                <a href="/blog/">Блог</a>
+                <Link href="/blog/" title={t("blog")}>{t("blog")}</Link>
               </li>
               <li className="header-mobile-menu__item">
-                <a href="/works/">Примеры работ</a>
+                <Link href="/works/" title={t("works")}>{t("works")}</Link>
               </li>
               <li className="header-mobile-menu__item">
-                <a href="/contacts">Контакты</a>
+                <Link href="/contacts" title={t("contacts")}>{t("contacts")}</Link>
               </li>
             </ul>
           </nav>
