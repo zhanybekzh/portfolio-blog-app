@@ -8,7 +8,6 @@ import classNames from "classnames";
 const Header: React.FC = () => {
   const [isWindowScrolled, setWindowScrolledStatus] = useState(false);
   const updateShadow = () => {
-    const header: any = document.querySelector(".header-mobile-menu");
     if (window.scrollY > 0) {
       setWindowScrolledStatus(true);
     } else {

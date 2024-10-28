@@ -17,6 +17,7 @@ async function fetchLastWorks(locale: string) {
     const response = await res.json();
     return response;
   } catch (e) {
+    console.log(e);
     throw new Error("Не получилось загрузить данные Blogs");
   }
 }
