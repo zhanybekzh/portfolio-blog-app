@@ -1,0 +1,33 @@
+{
+  "Home": {
+    "title": "Hello world!",
+    "about": "Go to the about page",
+    "to-blog": "all posts",
+    "head-text": "Hi, I am Zhanda, <br></br>A web developer from KZ<nonBreak></nonBreak>🇰🇿",
+    "about-me": "I create efficient web solutions and take on both frontend and backend projects separately or as a full-stack. Ready to collaborate on new and exciting ideas!",
+    "to-works": "all works",
+    "hire-me": "Hire me",
+    "download-cv": "Download CV",
+    "recent-posts": "Recent posts",
+    "last-works": "Last works"
+  },
+  "HeaderMenu": {
+    "main": "main",
+    "blog": "blog",
+    "works": "works",
+    "contacts": "contacts"
+  },
+  "Footer": {
+    "instagram": "I'm in instagram",
+    "github": "My github profile",
+    "whatsapp": "Text me on whatsapp",
+    "linkedin": "My linkedin"
+  },
+  "WorksSection": {
+    "my-works": "My works",
+    "more": "More"
+  },
+  "Buttons": {
+    "back": "back"
+  }
+}
