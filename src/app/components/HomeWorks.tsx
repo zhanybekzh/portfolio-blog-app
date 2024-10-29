@@ -18,7 +18,6 @@ async function fetchLastWorks(locale: string) {
     return response;
   } catch (e) {
     console.log(e);
-    throw new Error("Не получилось загрузить данные Blogs");
   }
 }
 const Works = async ({ locale }: any) => {

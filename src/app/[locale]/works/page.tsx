@@ -25,7 +25,6 @@ async function fetchWorks(locale: string) {
     return response;
   } catch (e) {
     console.log(e);
-    throw new Error("Не получилось загрузить данные Works");
   }
 }
 const WorksSection = async ({ params }: any) => {

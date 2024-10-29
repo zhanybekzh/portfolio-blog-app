@@ -56,7 +56,7 @@ const MyForm: React.FC = () => {
         body: JSON.stringify(values),
       });
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        console.log('Не удалось отправить данные формы');
       }
       recaptchaRef.current?.reset();
     } catch (error) {
