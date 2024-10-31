@@ -10,7 +10,7 @@ async function fetchLastPosts(locale: string) {
   };
   try {
     const res = await fetch(
-      `http://127.0.0.1:1337/api/blogs?locale=${localizations[locale]}&sort=Date:desc&populate=*&pagination[limit]=3`,
+      `https://strapi-for-blog-portfolio.onrender.com/api/blogs?locale=${localizations[locale]}&sort=Date:desc&populate=*&pagination[limit]=3`,
       options
     );
     const response = await res.json();

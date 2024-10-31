@@ -6,7 +6,7 @@ import { Link } from "@/i18n/routing";
 const Work = ({ workItem }: any) => {
   const t = useTranslations("WorksSection");
 
-  const imageUrl = `http://127.0.0.1:1337${workItem?.Image?.formats?.small?.url}`;
+  const imageUrl = `${workItem?.Image?.formats?.small?.url}`;
   const getYearFromDate = (date: any) => {
     const dateObject = new Date(date);
     const year = dateObject.getFullYear();

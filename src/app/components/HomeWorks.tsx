@@ -11,7 +11,7 @@ async function fetchLastWorks(locale: string) {
   };
   try {
     const res = await fetch(
-      `http://127.0.0.1:1337/api/works?locale=${localizations[locale]}&sort=Date:desc&populate=*&pagination[limit]=4`,
+      `https://strapi-for-blog-portfolio.onrender.com/api/works?locale=${localizations[locale]}&sort=Date:desc&populate=*&pagination[limit]=4`,
       options
     );
     const response = await res.json();

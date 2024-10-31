@@ -7,6 +7,6 @@ type LocalizationType = {
 
 export const localizations: LocalizationType = {
   'kz': 'kk-Cyrl',
-  'en': 'en-US',
-  'ru': 'ru-RU'
+  'en': 'en',
+  'ru': 'ru'
 };
