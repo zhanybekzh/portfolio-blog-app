@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./../globals.scss";
 
@@ -16,7 +18,8 @@ const heebo = Heebo({
 
 export const metadata: Metadata = {
   title: "Блог-портфолио",
-  description: "Главная страница блога портфолио веб-разработчика Жанда из Казахстана. Вы можете ознакомится с моими работами и нанять меня на свой проект.",
+  description:
+    "Главная страница блога портфолио веб-разработчика Жанда из Казахстана. Вы можете ознакомится с моими работами и нанять меня на свой проект.",
 };
 
 export default async function RootLayout({
@@ -36,6 +39,8 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Header />
           {children}
+          <SpeedInsights />
+          <Analytics />
           <Footer />
         </NextIntlClientProvider>
       </body>
