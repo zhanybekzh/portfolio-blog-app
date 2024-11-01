@@ -25,33 +25,71 @@ const schema = yup
 export async function POST(request: Request) {
   try {
     const { recaptcha, ...formData } = await request.json();
-    const recaptchaSecret = `${process.env.GOOGLE_RECAPTCHA_SECRET_KEY}`;
-    const recaptchaResponse = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify`,
+
+    // Проверка reCAPTCHA (если в production)
+    if (process.env.NODE_ENV === "production") {
+      const secretKey = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
+      const response = await fetch(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptcha}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
+      const data = await response.json();
+
+      if (!data.success) {
+        return NextResponse.json(
+          { message: "Recaptcha verification failed" },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Валидация данных формы
+    const validatedData = await schema.validate(formData);
+
+    // Формирование сообщения для Telegram
+    const telegramMessage = `✉️ Новая заявка с сайта zhanda.dev:
+  • Имя: ${validatedData.name}
+  • Email: ${validatedData.email}
+  • Телефон: ${validatedData.phone}
+  • Сообщение: ${validatedData.message}`;
+
+    // Отправка сообщения в Telegram
+    const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+
+    const telegramResponse = await fetch(
+      `https://api.telegram.org/bot${telegramToken}/sendMessage`,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
         },
-        body: `secret=${recaptchaSecret}&response=${recaptcha}`,
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: telegramMessage,
+        }),
       }
     );
-    const recaptchaResult = await recaptchaResponse.json();
-    if (!recaptchaResult.success) {
+
+    const telegramData = await telegramResponse.json();
+    if (!telegramData.ok) {
       return NextResponse.json(
-        { message: "reCAPTCHA verification failed" },
-        { status: 400 }
+        { message: "Failed to send message to Telegram" },
+        { status: 500 }
       );
     }
-    const validatedData = await schema.validate(formData);
-    return NextResponse.json({
-      message: "Form submitted successfully!",
-      data: validatedData,
-    });
+
+    return NextResponse.json({ message: "Form submitted successfully" });
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return NextResponse.json({ message: error.message }, { status: 400 });
     }
+    console.error("Failed to process form submission:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }
