@@ -11,7 +11,15 @@ const nextConfig = {
       '@node': path.resolve('node_modules'), 
     };
     return config;
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+    ],
+  },
 };
  
 export default withNextIntl(nextConfig);
