@@ -11,12 +11,12 @@ const Footer = () => {
           <div className="footer__inner col-12">
             <div className="footer__links links">
               <div className="links__item">
-                <a href="" title={t("instagram")}>
+                <a href="https://www.instagram.com/zhanda.dev/" title={t("instagram")}>
                   <Icon.Instagram className="icon icon-40" color={"rgba(255, 100, 100, 1)"}/>
                 </a>
               </div>
               <div className="links__item">
-                <a href="" title={t("github")}>
+                <a href="https://github.com/zhanybekzh/" title={t("github")}>
                   <Icon.GitHub className="icon icon-40" color={"rgba(33, 36, 61, 1)"}/>
                 </a>
               </div>
@@ -44,7 +44,7 @@ const Footer = () => {
                 </a>
               </div>
               <div className="links__item">
-                <a href="" title={t("linkedin")}>
+                <a href="https://www.linkedin.com/in/zhanda-dev/" title={t("linkedin")}>
                   <Icon.Linkedin className="icon  icon-40" color={"#0866C2"} />
                 </a>
               </div>
