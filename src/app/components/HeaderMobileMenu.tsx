@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import classNames from "classnames";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
@@ -10,9 +10,12 @@ const HeaderMobileMenu = () => {
   const t = useTranslations("HeaderMenu");
 
   const [isMobileMenuOpened, setMobileMenuStatus] = useState(false);
-  const toggleMobileMenu = (state: boolean = !isMobileMenuOpened) => {
-    setMobileMenuStatus(state);
-  };
+  const toggleMobileMenu = useCallback(
+    (state: boolean = !isMobileMenuOpened) => {
+      setMobileMenuStatus(state);
+    },
+    [isMobileMenuOpened]
+  );
 
   useEffect(() => {
     const handleBodyClick = (e: any) => {
@@ -26,7 +29,11 @@ const HeaderMobileMenu = () => {
     return () => {
       document.body.removeEventListener("click", handleBodyClick);
     };
-  }, [isMobileMenuOpened]);
+  }, [toggleMobileMenu]);
+
+  const handleLinkClick = () => {
+    toggleMobileMenu(false);
+  };
 
   return (
     <div
@@ -36,7 +43,7 @@ const HeaderMobileMenu = () => {
     >
       <div className="container">
         <div className="row align-items-center">
-        <div className="col-3">
+          <div className="col-3">
             <LocaleSwitcher />
           </div>
           <div className="col-9 header-mobile-menu__content">
@@ -55,16 +62,24 @@ const HeaderMobileMenu = () => {
           <nav className="col-12 header-mobile-menu__list-wrapper">
             <ul className="header-mobile-menu__list">
               <li className="header-mobile-menu__item">
-                <Link href="/" title={t("main")}>{t("main")}</Link>
+                <Link href="/" title={t("main")} onClick={handleLinkClick}>
+                  {t("main")}
+                </Link>
               </li>
-              <li className="header-mobile-menu__item">
-                <Link href="/blog/" title={t("blog")}>{t("blog")}</Link>
+              <li className="header-mobile-menu__item" onClick={handleLinkClick}>
+                <Link href="/blog/" title={t("blog")}>
+                  {t("blog")}
+                </Link>
               </li>
-              <li className="header-mobile-menu__item">
-                <Link href="/works/" title={t("works")}>{t("works")}</Link>
+              <li className="header-mobile-menu__item" onClick={handleLinkClick}>
+                <Link href="/works/" title={t("works")}>
+                  {t("works")}
+                </Link>
               </li>
-              <li className="header-mobile-menu__item">
-                <Link href="/contacts" title={t("contacts")}>{t("contacts")}</Link>
+              <li className="header-mobile-menu__item" onClick={handleLinkClick}>
+                <Link href="/contacts" title={t("contacts")}>
+                  {t("contacts")}
+                </Link>
               </li>
             </ul>
           </nav>

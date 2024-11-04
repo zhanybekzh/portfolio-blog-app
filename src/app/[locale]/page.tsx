@@ -3,6 +3,7 @@ import HomePosts from "./../components/HomePosts";
 import HomeWorks from "./../components/HomeWorks";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import Image from "next/image";
 
 export default function Home({ params }: any) {
   const t = useTranslations("Home");
@@ -15,7 +16,7 @@ export default function Home({ params }: any) {
             <div className="about-me__inner">
               <div className="about-me__photo">
                 <div className="img__wrapper">
-                  <img src="/images/ava.webp" alt="Моя фотография" />
+                  <Image src="/images/ava.webp" width={500} height={500} alt="Моя фотография"/>
                 </div>
               </div>
               <div className="about-me__content">

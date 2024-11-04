@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-
+import Image from "next/image";
 
 const Work = ({ workItem }: any) => {
   const t = useTranslations("WorksSection");
@@ -15,7 +15,7 @@ const Work = ({ workItem }: any) => {
   return (
     <div className="work">
       <div className="work__img">
-        <img src={imageUrl} alt={`image for ${workItem.Title}`}/>
+        <Image src={imageUrl} width={300} height={200} alt={`image for ${workItem.Title}`}/>
       </div>
       <div className="work__content">
         <h3 className="work__title">{workItem.Title} </h3>
