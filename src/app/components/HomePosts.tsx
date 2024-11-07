@@ -2,7 +2,6 @@ import React from "react";
 import Post from "./Post";
 import { localizations } from "@/i18n/localizations";
 
-export const dynamic = "force-dynamic";
 async function fetchLastPosts(locale: string) {
   const options = {
     headers: {
@@ -20,6 +19,7 @@ async function fetchLastPosts(locale: string) {
     console.log(e);
   }
 }
+
 const Posts = async ({ locale }: { locale: string }) => {
   const lastPosts = await fetchLastPosts(locale);
   return lastPosts?.data?.map((post: any) => (

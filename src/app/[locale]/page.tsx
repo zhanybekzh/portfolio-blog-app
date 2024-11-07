@@ -4,8 +4,14 @@ import HomeWorks from "./../components/HomeWorks";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
+import { localizations } from "@/i18n/localizations";
 
-export default function Home({ params }: any) {
+export async function generateStaticParams() {
+  return Object.keys(localizations).map((locale) => ({
+    locale,
+  }));
+}
+export default function Home({ params }: { params: { locale: string } }) {
   const t = useTranslations("Home");
   const NonBreakingSpace = () => <>&nbsp;</>;
   return (
@@ -16,7 +22,12 @@ export default function Home({ params }: any) {
             <div className="about-me__inner">
               <div className="about-me__photo">
                 <div className="img__wrapper">
-                  <Image src="/images/ava.webp" width={500} height={500} alt="Моя фотография"/>
+                  <Image
+                    src="/images/ava.webp"
+                    width={500}
+                    height={500}
+                    alt="Моя фотография"
+                  />
                 </div>
               </div>
               <div className="about-me__content">
