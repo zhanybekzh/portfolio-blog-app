@@ -29,5 +29,36 @@
   },
   "Buttons": {
     "back": "back"
+  },
+  "BlogSection": {
+    "heading": "Blog"
+  },
+  "Contacts": {
+    "write-me": "Contact me",
+    "paragraph1": "Write to me by <emailTag>e-mail</emailTag> or fill out the form below and tell me about your task.",
+    "paragraph2": "I'll contact you as soon as possible, answer your questions and offer a solution."
+  },
+  "WebForm": {
+    "validation": {
+      "nameRequired": "Name is required",
+      "invalidEmail": "Invalid email format",
+      "emailRequired": "Email is required",
+      "phoneRequired": "Phone number is required",
+      "invalidPhoneFormat": "Invalid phone format. Expected format: +7-7xx-xxx-xx-xx",
+      "messageMinLength": "Message must be at least 10 characters",
+      "messageRequired": "Message is required",
+      "recaptchaRequired": "Recaptcha verification is required"
+    },
+    "placeholders": {
+      "name": "Your name",
+      "phone": "Contact number +7-7xx-xxx-xx-xx",
+      "email": "E-mail",
+      "textarea": "More detailed description of your task or question"
+    },
+    "submit-button": "Submit",
+    "success": "Your message has been successfully sent!",
+    "error": "Error:",
+    "failed": "It seems the form is not working, please try to contact me through other channels. You can find a list of contacts in the website footer.",
+    "failed-thanks": " Thank you for your understanding!"
   }
 }

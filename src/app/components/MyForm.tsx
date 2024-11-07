@@ -5,31 +5,34 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import InputMask from "react-input-mask";
 import * as yup from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useTranslations } from "next-intl";
 
-const schema = yup
-  .object({
-    name: yup.string().required("Name is required"),
-    email: yup
-      .string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    phone: yup
-      .string()
-      .required("Phone number is required")
-      .matches(
-        /^\+7-7\d{2}-\d{3}-\d{2}-\d{2}$/,
-        "Invalid phone format. Expected format: +7-7xx-xxx-xx-xx"
-      ),
-    message: yup
-      .string()
-      .min(10, "Message must be at least 10 characters")
-      .required("Message is required"),
-    recaptcha: yup
-      .string()
-      .nullable()
-      .required("Recaptcha verification is required"),
-  })
-  .required();
+const getValidationSchema = (t: any) => {
+  return yup
+    .object({
+      name: yup.string().required(t("validation.nameRequired")),
+      email: yup
+        .string()
+        .email(t("validation.invalidEmail"))
+        .required(t("validation.emailRequired")),
+      phone: yup
+        .string()
+        .required(t("validation.phoneRequired"))
+        .matches(
+          /^\+7-7\d{2}-\d{3}-\d{2}-\d{2}$/,
+          t("validation.invalidPhoneFormat")
+        ),
+      message: yup
+        .string()
+        .min(10, t("validation.messageMinLength"))
+        .required(t("validation.messageRequired")),
+      recaptcha: yup
+        .string()
+        .nullable()
+        .required(t("validation.recaptchaRequired")),
+    })
+    .required();
+};
 
 interface IFormValues {
   name: string;
@@ -40,6 +43,7 @@ interface IFormValues {
 }
 
 const MyForm: React.FC = () => {
+  const t = useTranslations('WebForm');
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -83,14 +87,14 @@ const MyForm: React.FC = () => {
       {!isSubmitted ? (
         <Formik
           initialValues={initialValues}
-          validationSchema={schema}
+          validationSchema={getValidationSchema(t)}
           onSubmit={onSubmit}
         >
           {({ setFieldValue, isSubmitting }) => (
             <Form>
               <div className="mb-3">
                 <Field
-                  placeholder="Ваше имя"
+                  placeholder={t("placeholders.name")}
                   className="form-control form-control-xl"
                   type="text"
                   id="name"
@@ -101,7 +105,7 @@ const MyForm: React.FC = () => {
 
               <div className="mb-3">
                 <Field
-                  placeholder="E-mail"
+                  placeholder={t("placeholders.email")}
                   className="form-control form-control-xl"
                   type="email"
                   id="email"
@@ -117,7 +121,7 @@ const MyForm: React.FC = () => {
                       {...field}
                       className="form-control form-control-xl"
                       mask="+7-\799-999-99-99"
-                      placeholder="Контактный номер +7-7xx-xxx-xx-xx"
+                      placeholder={t("placeholders.phone")}
                     />
                   )}
                 </Field>
@@ -129,7 +133,7 @@ const MyForm: React.FC = () => {
                   className="form-control form-control-xl"
                   as="textarea"
                   rows={5}
-                  placeholder="Более подробное описание Вашей задачи или вопроса"
+                  placeholder={t("placeholders.textarea")}
                   id="message"
                   name="message"
                 />
@@ -146,7 +150,7 @@ const MyForm: React.FC = () => {
               </div>
               <input
                 className="mb-4 btn btn-primary"
-                value="Отправить"
+                value={t("submit-button")}
                 type="submit"
                 disabled={isSubmitting}
               />
@@ -154,16 +158,14 @@ const MyForm: React.FC = () => {
           )}
         </Formik>
       ) : (
-        <div className="alert alert-success mt-3">
-          Ваше сообщение успешно отправлено!
+        <div className="alert alert-success mt-3 mb-5">
+          {t("success")}
         </div>
       )}
       {status && status.startsWith("error") && (
         <div className="alert alert-danger mt-3">
-          Ошибка: {status.replace("error: ", "")} <br />
-          Кажется форма не работает, попробуйте связаться со мной по другим
-          каналам связи, список контактов можете просмотреть в подвале сайта.
-          Спасибо за понимание!
+          {t("error")} {status.replace("error: ", "")} <br />
+          {t("failed")}
         </div>
       )}
     </div>
