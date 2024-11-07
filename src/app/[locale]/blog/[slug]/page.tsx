@@ -4,7 +4,30 @@ import PostPageHeader from "@/app/components/PostPageHeader";
 import PostPageContent from "@/app/components/PostPageContent";
 import { localizations } from "@/i18n/localizations";
 import { generateMetadata as createMetadata } from "@/utils/generateMetadata";
-import formatDate from '@/utils/formatDate';
+import formatDate from "@/utils/formatDate";
+
+export async function generateStaticParams() {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+    },
+  };
+  const params = await Promise.all(
+    Object.keys(localizations).map(async (locale) => {
+      const res = await fetch(
+        `https://strapi-for-blog-portfolio.onrender.com/api/blogs?locale=${localizations[locale]}&populate=*`,
+        options
+      );
+      const response = await res.json();
+      const posts = response.data;
+      return posts.map((post: any) => ({
+        slug: post.urlSlug,
+        locale,
+      }));
+    })
+  );
+  return params.flat();
+}
 
 async function fetchPost(slug: string, locale: string) {
   const options = {
@@ -24,7 +47,11 @@ async function fetchPost(slug: string, locale: string) {
   }
 }
 
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string; locale: string };
+}) {
   const post = await fetchPost(params.slug, params.locale);
   const postData = post?.data[0];
 
@@ -43,7 +70,11 @@ export async function generateMetadata({ params }: any) {
     description: "Запрашиваемая статья не найдена.",
   };
 }
-export default async function page({ params }: any) {
+export default async function page({
+  params,
+}: {
+  params: { slug: string; locale: string };
+}) {
   const post = await fetchPost(params.slug, params.locale);
   const postData = post?.data[0];
 
