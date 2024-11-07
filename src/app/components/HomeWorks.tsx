@@ -2,7 +2,7 @@ import React from "react";
 import Work from "./Work";
 import { localizations } from "@/i18n/localizations";
 
-export const dynamic = "force-dynamic";
+
 async function fetchLastWorks(locale: string) {
   const options = {
     headers: {
@@ -25,7 +25,7 @@ const Works = async ({ locale }: any) => {
   return (
     <>
       {lastWorks?.data?.map((workItem: any) => {
-        return <Work workItem={workItem} key={workItem.id} />;
+        return <Work workItem={workItem} key={workItem.id}/>;
       })}
     </>
   );
