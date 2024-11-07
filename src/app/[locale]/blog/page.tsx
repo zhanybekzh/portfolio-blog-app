@@ -3,12 +3,12 @@ import BlogPosts from "../../components/BlogPosts";
 import "./../../styles/blog-page.scss";
 import { localizations } from "@/i18n/localizations";
 import type { Metadata } from "next";
+import BlogSectionHead from "@/app/components/BlogSectionHead";
 
 export const metadata: Metadata = {
   title: "Блог веб-разработчика",
   description: "Блог веб-разработчика Жанда из Казахстана, где я делюсь своим опытом в веб-разработке, рассказываю о проектах, технологиях и интересных событиях из жизни.",
 };
-
 
 async function fetchPosts(locale: string) {
   const options = {
@@ -33,7 +33,7 @@ const blogSection = async ({ params }: any) => {
     <main className="blog-section">
       <div className="container">
         <div className="row">
-          <h1 className="blog-section__head">Blog</h1>
+          <BlogSectionHead />
           <div className="blog-section-posts__list">
             <BlogPosts posts={data} />
           </div>
