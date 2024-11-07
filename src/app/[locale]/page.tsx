@@ -29,7 +29,7 @@ export default function Home({ params }: any) {
                 <p className="about-me__text">{t("about-me")}</p>
                 <div className="about-me__buttons">
                   <a
-                    href="/files/cv.pdf"
+                    href="/files/Zhanybek_Zhandos_CV.pdf?01.01.2024"
                     download
                     className="about-me__button btn btn-primary"
                   >
