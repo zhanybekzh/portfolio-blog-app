@@ -1,38 +1,51 @@
+"use client";
+
 import React from "react";
 import { Link } from "@/i18n/routing";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import LocaleSwitcher from "./LocalSwitcher";
-
+import clsx from "classnames";
+import StaticMenuDesktopStructure from "./StaticDesktopMenuStructure";
 
 function HeaderDesktopMenu() {
-
   const t = useTranslations("HeaderMenu");
+  const pathname = usePathname();
+
+  const stripLocale = (path: string) => {
+    const parts = path.split("/");
+    if (parts.length > 1 && ["en", "ru", "kz"].includes(parts[1])) {
+      return "/" + parts.slice(2).join("/");
+    }
+    return path;
+  };
+
+  const currentPath = stripLocale(pathname);
+  
+  const menuItems = [
+    { href: "/", label: t("main") },
+    { href: "/blog", label: t("blog") },
+    { href: "/works", label: t("works") },
+    { href: "/contacts", label: t("contacts") },
+  ];
+
   return (
-    <div className="header-menu ">
-      <div className="container">
-        <div className="row justify-content-between align-items-center">
-          <div className="col-3">
-            <LocaleSwitcher />
-          </div>
-          <nav className="col-9 header-menu__list-wrapper">
-            <ul className="header-menu__list">
-              <li className="header-menu__item">
-                <Link href="/" title={t("main")}>{t("main")}</Link>
-              </li>
-              <li className="header-menu__item">
-                <Link href="/blog/" title={t("blog")}>{t("blog")}</Link>
-              </li>
-              <li className="header-menu__item">
-                <Link href="/works/" title={t("works")}>{t("works")}</Link>
-              </li>
-              <li className="header-menu__item">
-                <Link href="/contacts" title={t("contacts")}>{t("contacts")}</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
+    <StaticMenuDesktopStructure>
+      {menuItems.map((item) => (
+        <li
+          key={item.href}
+          className={clsx(
+            "header-menu__item",
+            item.href === "/"
+                ? currentPath === item.href && "header-menu__item_active"
+                : currentPath.startsWith(item.href) && "header-menu__item_active"
+          )}
+        >
+          <Link href={item.href} title={item.label}>
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </StaticMenuDesktopStructure>
   );
 }
 
