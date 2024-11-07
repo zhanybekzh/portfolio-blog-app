@@ -2,8 +2,9 @@
 
 .blog-section {
   &__head {
-    padding: 0 30px;
     margin: 20px 0;
+    font-size: 2rem;
+    font-weight: 500;
   }
   .blog-section-posts__list {
     display: flex;

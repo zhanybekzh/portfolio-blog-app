@@ -8,9 +8,10 @@
     font-weight: 400;
     text-align: center;
     @media (min-width: 576px) {
-      margin-bottom: 30px;
-      font-size: 22px;
+      margin: 20px auto 30px;
+      font-size: 2rem;
       text-align: left;
+      font-weight: 500;
     }
   }
   & &__list {

@@ -1,8 +1,9 @@
 .work {
   padding-bottom: 20px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #e0e0e0;
   margin-bottom: 20px;
-  @media(min-width: 768px) {
+  width: 100%;
+  @media (min-width: 768px) {
     border: none;
     margin-bottom: 0;
   }
@@ -26,6 +27,7 @@
     line-height: 1;
     margin: 0 auto 20px;
     line-height: 30px;
+    min-height: 65px;
   }
   &__properties {
     display: flex;
@@ -47,14 +49,15 @@
   &__description {
     text-align: justify;
     margin-bottom: 20px;
-    height: 140px;
     display: -webkit-box;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    @media (min-width: 768px) {
+      height: 140px;
+    }
   }
   &__content {
     padding: 10px;
-
   }
 }

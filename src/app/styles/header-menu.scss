@@ -28,7 +28,9 @@ header.shadow {
         min-height: 50px;
       }
       &__item {
-        
+        &_active {
+          text-shadow: 0 0 1px currentColor;
+        }
       }
       &__item a {
         font-weight: 400;
@@ -39,11 +41,11 @@ header.shadow {
         text-decoration: none;
         padding: 0 5px;
         color: $text-color;
-        transition: transform ease .1s;
+        transition: all ease .1s;
         &:hover {
-          font-weight: bold;
-          transform: scale(1.05);
+          text-shadow: 0 0 1px currentColor;
         }
+        
       }
     }
   }
