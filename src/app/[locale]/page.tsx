@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { localizations } from "@/i18n/localizations";
 
+export const dynamic = "force-static";
 export async function generateStaticParams() {
   return Object.keys(localizations).map((locale) => ({
     locale,
