@@ -5,17 +5,15 @@ import PostPageContent from "@/app/components/PostPageContent";
 import { localizations } from "@/i18n/localizations";
 import { generateMetadata as createMetadata } from "@/utils/generateMetadata";
 import formatDate from "@/utils/formatDate";
+import { setRequestLocale } from "next-intl/server";
 
 async function fetchPost(slug: string, locale: string) {
-  const options = {
-    headers: {
-      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-    },
-  };
   try {
     const res = await fetch(
       `https://strapi-for-blog-portfolio.onrender.com/api/works?locale=${localizations[locale]}&filters[urlSlug][$eq]=${slug}&populate=*`,
-      options
+      {
+        cache: "force-cache",
+      }
     );
     const response = await res.json();
     return response;
@@ -36,13 +34,17 @@ export async function generateMetadata({ params }: any) {
       datePublished: formatDate(workItem.Date),
     });
   }
-
   return {
     title: "Статья не найдена",
     description: "Запрашиваемая статья не найдена.",
   };
 }
-const page = async ({ params }: any) => {
+const page = async ({
+  params,
+}: {
+  params: { slug: string; locale: string };
+}) => {
+  setRequestLocale(params.locale);
   const work = await fetchPost(params.slug, params.locale);
   const workItem = work?.data[0];
   return (
