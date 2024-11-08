@@ -5,7 +5,7 @@ export default createMiddleware(routing);
 
 export const config = {
   matcher: [
-    "/((?!api|_next|images|public|favicon|files|static|favicon.ico).*)",
+    "/((?!api|_next|images|public|favicon|files|static|sitemap.xml|robots.txt).*)",
     "/(ru|en|kz)/:path*",
   ],
 };
