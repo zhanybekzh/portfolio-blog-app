@@ -64,5 +64,17 @@
   "MainPageMetadata": {
     "title":"Zhanda.dev Blog Portfolio",
     "description": "Welcome to the Blog Portfolio of Zhanda, a web developer from Kazakhstan. You can explore my work and hire me for your project."
+  },
+  "BlogSectionMetadata": {
+    "title": "'Blog' Section of Zhanda.dev",
+    "description": "The blog of Zhanda, a web developer from Kazakhstan, where I share my experience in web development, talk about projects, technologies, and interesting events from life."
+  },
+  "WorksSectionMetadata": {
+    "title": "Examples of Completed Works",
+    "description": "A section featuring examples of web development projects I've completed, including the creation of websites and web applications using modern technologies like React and Next.js."
+  },
+  "ContactsSectionMetadata": {
+    "title": "Contact Form for Collaboration",
+    "description": "A page to get in touch with Zhanda, a web developer from Kazakhstan. Fill out the form to discuss your project, ask questions, or start a collaboration."
   }
 }

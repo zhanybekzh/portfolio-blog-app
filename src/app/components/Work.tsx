@@ -27,7 +27,7 @@ const Work = ({ workItem }: any) => {
           {workItem.Description}
         </div>
         <div className="work__buttons">
-          <Link href={`works/${workItem.urlSlug}`} className="work__button-about btn btn-black">{t("more")}</Link>
+          <Link href={`/works/${workItem.urlSlug}`} className="work__button-about btn btn-black">{t("more")}</Link>
         </div>
       </div>
     </div>

@@ -2,24 +2,31 @@ import React from "react";
 import BlogPosts from "../../components/BlogPosts";
 import "./../../styles/blog-page.scss";
 import { localizations } from "@/i18n/localizations";
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import BlogSectionHead from "@/app/components/BlogSectionHead";
+import { setRequestLocale } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Блог веб-разработчика",
-  description: "Блог веб-разработчика Жанда из Казахстана, где я делюсь своим опытом в веб-разработке, рассказываю о проектах, технологиях и интересных событиях из жизни.",
-};
+export const dynamic = "force-static";
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  const t = await getTranslations({ locale, namespace: "BlogSectionMetadata" });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 async function fetchPosts(locale: string) {
-  const options = {
-    headers: {
-      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-    },
-  };
   try {
     const res = await fetch(
       `https://strapi-for-blog-portfolio.onrender.com/api/blogs?locale=${localizations[locale]}&sort=Date:desc&populate=*`,
-      options
+      {
+        cache: "force-cache",
+      }
     );
     const response = await res.json();
     return response;
@@ -27,8 +34,13 @@ async function fetchPosts(locale: string) {
     console.log(e);
   }
 }
-const blogSection = async ({ params }: any) => {
-  const data = await fetchPosts(params.locale);
+const blogSection = async ({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) => {
+  setRequestLocale(locale);
+  const data = await fetchPosts(locale);
   return (
     <main className="blog-section">
       <div className="container">

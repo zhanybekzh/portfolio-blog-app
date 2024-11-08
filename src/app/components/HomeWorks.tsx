@@ -18,7 +18,7 @@ async function fetchLastWorks(locale: string) {
     console.log(e);
   }
 }
-const Works = async ({ locale }: any) => {
+const Works = async ({ locale }: { locale: string }) => {
   const lastWorks = await fetchLastWorks(locale);
   return (
     <>

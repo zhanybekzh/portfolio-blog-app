@@ -1,14 +1,29 @@
 import React from "react";
 import MyForm from "@/app/components/MyForm";
-import type { Metadata } from "next";
 import ContactsHead from "@/app/components/ContactsHead";
+import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Контактная форма для сотрудничества",
-  description: "Страница для связи с веб-разработчиком Жанда из Казахстана. Заполните форму, чтобы обсудить ваш проект, задать вопросы или начать сотрудничество.",
-};
+export const dynamic = "force-static";
 
-const contacts = () => {
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  const t = await getTranslations({
+    locale,
+    namespace: "ContactsSectionMetadata",
+  });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
+
+const Contacts = ({ params: { locale } }: { params: { locale: string } }) => {
+  setRequestLocale(locale);
   return (
     <div className="container">
       <div className="row mb-4 mt-3">
@@ -19,4 +34,4 @@ const contacts = () => {
   );
 };
 
-export default contacts;
+export default Contacts;
