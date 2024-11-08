@@ -50,6 +50,8 @@ export default async function RootLayout({
         />
         <meta name="apple-mobile-web-app-title" content="zhanda.dev" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
+        <meta name="google-site-verification" content="9uC-dOThG2blBEVeSDS4B_mK0dbeLMLoy75bFrJIg5A" />
+        <meta name="yandex-verification" content="2251d91dd91fb1d5" />
       </head>
       <body className={heebo.className}>
         <NextIntlClientProvider messages={messages}>
