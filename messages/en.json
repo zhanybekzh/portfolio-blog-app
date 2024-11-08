@@ -60,5 +60,9 @@
     "error": "Error:",
     "failed": "It seems the form is not working, please try to contact me through other channels. You can find a list of contacts in the website footer.",
     "failed-thanks": " Thank you for your understanding!"
+  },
+  "MainPageMetadata": {
+    "title":"Zhanda.dev Blog Portfolio",
+    "description": "Welcome to the Blog Portfolio of Zhanda, a web developer from Kazakhstan. You can explore my work and hire me for your project."
   }
 }

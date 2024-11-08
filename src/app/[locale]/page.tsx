@@ -1,19 +1,32 @@
 import * as Icon from "react-feather";
 import HomePosts from "./../components/HomePosts";
 import HomeWorks from "./../components/HomeWorks";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { localizations } from "@/i18n/localizations";
+import { setRequestLocale } from "next-intl/server";
 
 export const dynamic = "force-static";
-export async function generateStaticParams() {
-  return Object.keys(localizations).map((locale) => ({
-    locale,
-  }));
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  const t = await getTranslations({ locale, namespace: "MainPageMetadata" });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
 }
-export default function Home({ params }: { params: { locale: string } }) {
-  const t = useTranslations("Home");
+
+export default async function Home({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "Home" });
   const NonBreakingSpace = () => <>&nbsp;</>;
   return (
     <>
@@ -63,7 +76,7 @@ export default function Home({ params }: { params: { locale: string } }) {
             <div className="row">
               <h2 className="col-12 recent-posts__head">{t("recent-posts")}</h2>
               <div className="recent-posts__list posts__list">
-                <HomePosts locale={params.locale} />
+                <HomePosts locale={locale} />
               </div>
               <Link href="/blog/" className="link-to-page">
                 {t("to-blog")}
@@ -77,7 +90,7 @@ export default function Home({ params }: { params: { locale: string } }) {
             <div className="row">
               <h2 className="col-12 recent-works__head">{t("last-works")}</h2>
               <div className="recent-works__list">
-                <HomeWorks locale={params.locale} />
+                <HomeWorks locale={locale} />
               </div>
               <Link href="/works/" className="link-to-page">
                 {t("to-works")}
