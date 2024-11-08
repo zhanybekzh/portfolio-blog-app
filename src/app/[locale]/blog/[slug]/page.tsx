@@ -9,6 +9,26 @@ import { setRequestLocale } from "next-intl/server";
 
 export const dynamic = "force-static";
 
+export async function generateStaticParams() {
+  const params = await Promise.all(
+    Object.keys(localizations).map(async (locale) => {
+      const res = await fetch(
+        `https://strapi-for-blog-portfolio.onrender.com/api/blogs?locale=${localizations[locale]}&populate=*`,
+        {
+          cache: "force-cache",
+        }
+      );
+      const response = await res.json();
+      const posts = response.data;
+      return posts.map((post: any) => ({
+        slug: post.urlSlug,
+        locale,
+      }));
+    })
+  );
+  return params.flat();
+}
+
 async function fetchPost(slug: string, locale: string) {
   try {
     const res = await fetch(

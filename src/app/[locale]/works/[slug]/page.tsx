@@ -7,7 +7,27 @@ import { generateMetadata as createMetadata } from "@/utils/generateMetadata";
 import formatDate from "@/utils/formatDate";
 import { setRequestLocale } from "next-intl/server";
 
-async function fetchPost(slug: string, locale: string) {
+export async function generateStaticParams() {
+  const params = await Promise.all(
+    Object.keys(localizations).map(async (locale) => {
+      const res = await fetch(
+        `https://strapi-for-blog-portfolio.onrender.com/api/works?locale=${localizations[locale]}&populate=*`,
+        {
+          cache: "force-cache",
+        }
+      );
+      const response = await res.json();
+      const works = response.data;
+      return works.map((work: any) => ({
+        slug: work.urlSlug,
+        locale,
+      }));
+    })
+  );
+  return params.flat();
+}
+
+async function fetchWork(slug: string, locale: string) {
   try {
     const res = await fetch(
       `https://strapi-for-blog-portfolio.onrender.com/api/works?locale=${localizations[locale]}&filters[urlSlug][$eq]=${slug}&populate=*`,
@@ -22,7 +42,7 @@ async function fetchPost(slug: string, locale: string) {
   }
 }
 export async function generateMetadata({ params }: any) {
-  const work = await fetchPost(params.slug, params.locale);
+  const work = await fetchWork(params.slug, params.locale);
   const workItem = work?.data[0];
 
   if (workItem) {
@@ -45,7 +65,7 @@ const page = async ({
   params: { slug: string; locale: string };
 }) => {
   setRequestLocale(params.locale);
-  const work = await fetchPost(params.slug, params.locale);
+  const work = await fetchWork(params.slug, params.locale);
   const workItem = work?.data[0];
   return (
     <main className="post-page">
