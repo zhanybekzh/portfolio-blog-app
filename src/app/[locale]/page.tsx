@@ -55,7 +55,7 @@ export default async function Home({
                 <p className="about-me__text">{t("about-me")}</p>
                 <div className="about-me__buttons">
                   <a
-                    href={`/files/Zhanybek_Zhandos_CV_${localizations[locale]}.pdf?01.01.2024`}
+                    href={`/files/Zhanybek_Zhandos_CV_${locale}.pdf?18.11.24`}
                     download
                     className="about-me__button btn btn-primary"
                   >
